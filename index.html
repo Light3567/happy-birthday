@@ -1,0 +1,218 @@
+<!doctype html>
+<html lang="en"> 
+<head> 
+    <meta charset="UTF-8"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+    <title>Happy 18th Birthday</title> 
+    <style>
+        body {
+            background: linear-gradient(to bottom right, #ffccff, #ff99cc, #ff6699);
+            text-align: center;
+            font-family: Arial, sans-serif;
+            position: relative;
+            overflow: hidden;
+            transition: background-color 1s;
+            padding: 20px;
+        }
+        #introMessage, #trustQuestion, #giftContent {
+            position: relative;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        button {
+            padding: 20px;
+            font-size: 24px;
+            background-color: #ff6699;
+            border: none;
+            cursor: pointer;
+            margin-top: 20px; /* Adjusted for spacing */
+            border-radius: 10px;
+            color: white;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+        #gift, #butterfly, #messageBox {
+            transition: opacity 1s;
+        }
+        #gift {
+            display: none;
+            width: 200px;
+            height: auto;
+        }
+        #butterfly {
+            display: none;
+            width: 100px;
+            animation: fly 10s infinite alternate;
+        }
+        #messageBox {
+            background: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+            color: black;
+            display: none;
+            width: 80%;
+            max-width: 600px;
+            margin: 20px auto;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+        @keyframes fly {
+            0% { transform: translate(0, 0); }
+            25% { transform: translate(200px, -50px); }
+            50% { transform: translate(-200px, -100px); }
+            75% { transform: translate(100px, 50px); }
+            100% { transform: translate(0, 0); }
+        }
+        h1 {
+            color: white;
+            font-size: 48px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        .flower, .stem {
+            display: none;
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        .stem {
+            width: 5px;
+            height: 0;
+            background-color: green;
+            transition: height 2s;
+        }
+        .flower {
+            width: 50px;
+            height: 50px;
+            background-color: pink;
+            border-radius: 50%;
+            display: none;
+            transition: opacity 1s;
+        }
+        #flowerQuote {
+            font-size: 16px;
+            color: white;
+            font-weight: bold;
+            text-align: center;
+            display: none;
+            position: absolute;
+            bottom: 60px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        #growFlowerButton {
+            padding: 10px;
+            font-size: 16px;
+            position: absolute;
+            top: 150px;
+            left: 20px;
+        }
+    </style> 
+</head> 
+<body> 
+    <h1>Happy 18th Birthday!</h1> 
+
+    <!-- Intro message -->
+    <div id="introMessage">
+        <p style="font-size: 24px; color: white;">Use headphones for a better experience!</p>
+        <div id="trustQuestion" style="display: none;">
+            <p style="font-size: 24px; color: white;">Do you trust me?</p>
+            <button id="yesButton">Yes</button>
+        </div>
+    </div>
+
+    <!-- Gift Content -->
+    <div id="giftContent" style="display: none;">
+        <button id="startButton">Click to Start!</button> 
+        <img id="gift" src="https://s3-alpha.figma.com/hub/file/1803833747/1d295ee8-6b33-474b-920a-01b1729365f0-cover.png" alt="Gift Box"> 
+        <img id="butterfly" src="https://images.rawpixel.com/image_png_800/czNmcy1wcml2YXRlX2ltYWdlcy93ZWJzaXRlX2NvbnRlbnQvbHIvcm0yMDMtbnVub29uLTA0LnBuZw.png" alt="Butterfly"> 
+        <div id="messageBox"></div> 
+        <div class="stem"></div> 
+        <div class="flower"></div> 
+        <div id="flowerQuote">“Every flower is a soul blossoming in nature.”</div> 
+        <button id="growFlowerButton" style="display: none;">Click to Grow the Flower</button> 
+    </div>
+
+    <script>
+        let videoPlayed = false;
+
+        // Show trust question after a short delay
+        setTimeout(function() {
+            document.getElementById('trustQuestion').style.display = 'block';
+        }, 2000); // Wait 2 seconds before showing "Do you trust me?"
+
+        // Show the gift content after clicking "Yes"
+        document.getElementById('yesButton').onclick = function() {
+            document.getElementById('introMessage').style.display = 'none';
+            document.getElementById('giftContent').style.display = 'block';
+            document.getElementById('startButton').style.display = 'block'; // Show the start button
+        };
+
+        // Start button logic for the gift
+        document.getElementById('startButton').onclick = function() {
+            document.getElementById('gift').style.display = 'block';
+            document.getElementById('gift').style.opacity = '1';
+        }
+
+        document.getElementById('gift').onclick = function() {
+            if (!videoPlayed) {
+                document.body.style.backgroundColor = 'black';
+                document.getElementById('gift').style.opacity = '0';
+
+                setTimeout(function() {
+                    // Update the video URL to include controls
+                    var videoUrl = "https://www.youtube.com/embed/hqd-W3NtFAE?autoplay=1&fs=1&controls=1";
+                    var iframe = document.createElement('iframe');
+                    iframe.src = videoUrl;
+                    iframe.style.position = 'fixed';
+                    iframe.style.top = '0';
+                    iframe.style.left = '0';
+                    iframe.style.width = '100%';
+                    iframe.style.height = '100%';
+                    iframe.style.border = 'none';
+                    document.body.appendChild(iframe);
+
+                    setTimeout(function() {
+                        document.body.removeChild(iframe);
+                        document.body.style.backgroundColor = '#ffccff';
+                        document.getElementById('butterfly').style.display = 'block';
+                        document.getElementById('butterfly').style.opacity = '1';
+
+                        document.getElementById('messageBox').style.display = 'block';
+                        document.getElementById('messageBox').innerHTML = "Click the gift to see a special message!";
+                        videoPlayed = true;
+
+                        document.getElementById('growFlowerButton').style.display = 'block';
+                    }, 44000); // Set to 44 seconds (44000 ms)
+                }, 1000);
+            } else {
+                document.body.style.backgroundColor = '#ffccff';
+                document.getElementById('butterfly').style.display = 'block';
+                document.getElementById('butterfly').style.opacity = '1';
+                document.getElementById('messageBox').style.display = 'block';
+                document.getElementById('messageBox').innerHTML = "Happy 18th Birthday, Kwen! This is such an exciting time as you step into adulthood. I hope this year brings you amazing adventures and unforgettable memories. This art is paid by your cousin.";
+                
+                document.getElementById('growFlowerButton').style.display = 'block';
+            }
+        }
+
+        document.getElementById('growFlowerButton').onclick = function() {
+            document.getElementById('butterfly').style.display = 'none';
+            document.getElementById('messageBox').style.display = 'none';
+            document.getElementById('growFlowerButton').style.display = 'none';
+
+            document.body.style.background = 'linear-gradient(to right, #ffccff, #ff6699)';
+
+            document.querySelector('.stem').style.display = 'block';
+            document.querySelector('.flower').style.display = 'block';
+
+            setTimeout(function() {
+                document.querySelector('.stem').style.height = '150px';
+            }, 1000);
+
+            setTimeout(function() {
+                document.querySelector('.flower').style.opacity = '1';
+            }, 2000);
+        };
+    </script>
+
+
+``
+</body></html>
